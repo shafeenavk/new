@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+ var department = $("#dd1");
+ var courses = $("#dd2");
+ var $options = courses.find('option');
+ department.on('change',function(){
+    courses.html($options.filter('[value="'+ this.value  +'"]'));
+ }).trigger('change');
+});
+</script>
+
+
+<form>
+  <div>
+    <label><b>Name</b></label><br>
+    <input type="text"  name="username" placeholder="Enter your Name">
+  </div>
+  <div>
+    <label><b>DOB</b></label><br>
+    <input type="date" name="date" placeholder="Enter your DOB">
+  </div>
+  <div>
+    <label><b>Age</b></label><br>
+    <input type="text"  name="age" placeholder="Enter your Age">
+  </div>
+  <div>
+    <label><b>Gender</b></label><br>
+    <input type="radio"  name="rdbGender">Male
+    <input type="radio"  name="rdbGender">Female<br>
+  </div>
+   <div>
+    <label><b>Phone number</b></label><br>
+    <input type="text"  name="number" placeholder="Enter your Phone number">
+  </div>
+  <div>
+    <label><b>Email</b></label><br>
+    <input type="email" name="email" placeholder="Enter email">
+  </div>
+  <div>
+    <label><b>Address</b></label><br>
+    <input type="text"  name="address" placeholder="Enter your Address">
+  </div>
+    <div><h5>Department</h5>
+    <select name="Department" id="dd1" >
+        <option value="">--Choose Department--</option>
+        {% for department in department %}
+        <option value="{{department}}">{{department.name}}</option>
+        {% endfor %}
+
+    </select>
+        <div><h5>Courses</h5>
+    <select name="courses"  id="dd2">
+        <option value="">--Choose Courses--</option>
+        {% for courses in courses %}
+        <option value="{{courses}}">{{courses.name}}</option>
+        {% endfor %}
+
+    </select>
+
+    <div><h5>Purpose</h5>
+    <select name="Purpose">
+        <option value="">--Choose Purpose--</option>
+        <option value="Enquiry">Enquiry</option>
+        <option value="Place">Place</option>
+        <option value="Order">Order</option>
+        <option value="Return">Return</option>
+    </select>
+</div>
+
+
+</div>
+    <label><b>Materials Provide</b></label><br>
+    <input type="checkbox"  name="rdbQuestion">Notebook
+    <input type="checkbox" name="rdbQuestion">Pen
+    <input type="checkbox"  name="rdbQuestion">Exam papers
+    <input type="checkbox"  name="rdbQuestion">Tools<br>
+  </div>
+
+  <a  class="btn btn-primary" href="{% url 'collegeapp:submit' %}">Submit</a>
+
+        <button type= "submit" class="btn btn-success">Log out</button>
+
+</form>
+{% endblock %}
